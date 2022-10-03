@@ -1,4 +1,4 @@
-#! /bin/bash 
+#!/bin/bash 
 
 ## dep
 # apt install -y curl jq
