@@ -1,0 +1,80 @@
+{
+  "CPUs": [
+    {
+      "model_name": "AMD Ryzen 9 5950X",
+      "core": 16,
+      "thread": 32,
+      "TDP": 105
+    },
+    {
+      "model_name": "AMD Ryzen 7 3800X",
+      "core": 8,
+      "thread": 16,
+      "TDP": 105
+    },
+    {
+      "model_name": "i9-9900K",
+      "core": 8,
+      "thread": 16,
+      "TDP": 95
+    },
+    {
+      "model_name": "AMD Ryzen 7 3700X",
+      "core": 8,
+      "thread": 16,
+      "TDP": 65
+    },
+    {
+      "model_name": "i7-6700K",
+      "core": 4,
+      "thread": 8,
+      "TDP": 91
+    },
+    {
+      "model_name": "AMD EPYC 7502P",
+      "core": 32,
+      "thread": 64,
+      "TDP": 180
+    },
+    {
+      "model_name": "AMD Ryzen 9 3900X",
+      "core": 12,
+      "thread": 24,
+      "TDP": 105
+    },
+    {
+      "model_name": "Intel(R) Xeon(R) CPU E5-2690 v2",
+      "core": 10,
+      "thread": 20,
+      "TDP": 130
+    },
+    {
+      "model_name": "AMD Ryzen 5 3600",
+      "core": 6,
+      "thread": 12,
+      "TDP": 65
+    }
+  ],
+  "Countries": [
+    {
+      "code": "CA",
+      "carbone_intensity": 29
+    },
+    {
+      "code": "FR",
+      "carbone_intensity": 112
+    },
+    {
+      "code": "FI",
+      "carbone_intensity": 120
+    },
+    {
+      "code": "DE",
+      "carbone_intensity": 325
+    },
+    {
+      "code": "NO",
+      "carbone_intensity": 28
+    }
+  ]
+}
