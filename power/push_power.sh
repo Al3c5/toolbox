@@ -19,10 +19,6 @@ while :; do
 	    echo "export power  consumption metrics to a pushgateway instance (--help : help msg | --debug : only print exported values)"    # Display a usage synopsis.
             exit
             ;;
-	--debug)
-	    debug="1"
-	    break
-	    ;;
 	--install)
 	    curl -s -o $HOME/push_power.sh https://raw.githubusercontent.com/Al3c5/toolbox/main/power/push_power.sh
 	    chmod +x  $HOME/push_power.sh 
@@ -32,11 +28,15 @@ while :; do
 	    read -p "Server location " SERVER_LOCATION
 	    read -p "Prometheus push-gateway url" POWER_PUSH_GATEWAY
 	    read -p "Cron schdeule (default: */20 * * * *)"  CRON_SCHEDULE
-	    cat <<EOF |  crontab 
-		${CRON_SCHEDULE:-*/20 * * * *} SERVER_NAME=$SERVER_NAME && SERVER_LOCATION=$SERVER_LOCATION && POWER_PUSH_GATEWAY=$POWER_PUSH_GATEWAY && /usr/local/bin/push_power.sh
-	    	EOF
+	    crontab -l | \
+		{cat; echo ""${CRON_SCHEDULE:-*/20 * * * *} SERVER_NAME="$SERVER_NAME" && SERVER_LOCATION="$SERVER_LOCATION" && POWER_PUSH_GATEWAY="$POWER_PUSH_GATEWAY" && /usr/local/bin/push_power.sh} | \
+	 	crontab - 
 	    exit
 	    ;;
+        --debug)
+            debug="1"
+            break
+            ;;
 	-?*)
             echo 'Error: Unknown option (aborded): %s\n' "$1" >&2
 	    exit 
