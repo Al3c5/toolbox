@@ -16,21 +16,15 @@
 while :; do
     case $1 in
         -h|-\?|--help)
-	    echo "export power  consumption metrics to a pushgateway instance (--help : help msg | --debug : only print exported values)"    # Display a usage synopsis.
+	    echo "export power  consumption metrics to a pushgateway instance "
+	    echo "	--help : help msg "
+	    echo "	--debug : only print exported value"
+	    echo "	--install : installer for a cron task"
             exit
             ;;
 	--install)
-	    curl -s -o $HOME/push_power.sh https://raw.githubusercontent.com/Al3c5/toolbox/main/power/push_power.sh
-	    chmod +x  $HOME/push_power.sh 
-	    sudo mv  $HOME/push_power.sh  /usr/local/bin 
-	    sudo chown root:root /usr/local/bin/push_power.sh
-	    read -p "Server name " SERVER_NAME 
-	    read -p "Server location " SERVER_LOCATION
-	    read -p "Prometheus push-gateway url" POWER_PUSH_GATEWAY
-	    read -p "Cron schdeule (default: */20 * * * *)"  CRON_SCHEDULE
-	    { crontab -l ; echo "${CRON_SCHEDULE:-*/20 * * * *} SERVER_NAME=\"$SERVER_NAME\" && SERVER_LOCATION=\"$SERVER_LOCATION\" && POWER_PUSH_GATEWAY=\"$POWER_PUSH_GATEWAY\" && /usr/local/bin/push_power.sh;"} | \
-	 	crontab - 
-	    exit
+	    install="1"
+	    break
 	    ;;
         --debug)
             debug="1"
@@ -45,6 +39,21 @@ while :; do
 	    ;;
 esac
 done
+
+install () {
+	read -p "Server name " SERVER_NAME
+        read -p "Server location " SERVER_LOCATION
+        read -p "Prometheus push-gateway url" POWER_PUSH_GATEWAY
+        read -p "Cron schdeule (default: */20 * * * *)"  CRON_SCHEDULE
+        { crontab -l 2>/dev/null ; echo "${CRON_SCHEDULE:-*/20 * * * *} SERVER_NAME=\"$SERVER_NAME\" && SERVER_LOCATION=\"$SERVER_LOCATION\" && POWER_PUSH_GATEWAY=\"$POWER_PUSH_GATEWAY\" && /usr/local/bin/push_power.sh";} | crontab -
+	exit 1
+}
+
+
+if [[ "$install" == "1" ]]; then 
+	install
+	exit 1 
+fi
 
 instance="${SERVER_NAME:-$(hostname)}"
 
