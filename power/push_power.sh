@@ -73,11 +73,11 @@ power_tdp_watt ${power_tdp_watt:-0}
 power_g_co2_per_k_watt_h ${power_g_co2_per_k_watt_h:-0}
 EOF
 
-if [[ $debug -eq 1 ]]
+if [ $debug -eq 1 ]
 	then
 		echo "$url_gw"
 		echo 
-		more $tmp_metrics
+		cat $tmp_metrics
 		exit
 fi
 cd "$( dirname "${BASH_SOURCE[0]}" )"
