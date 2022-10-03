@@ -28,8 +28,7 @@ while :; do
 	    read -p "Server location " SERVER_LOCATION
 	    read -p "Prometheus push-gateway url" POWER_PUSH_GATEWAY
 	    read -p "Cron schdeule (default: */20 * * * *)"  CRON_SCHEDULE
-	    crontab -l | \
-		{cat; echo "${CRON_SCHEDULE:-*/20 * * * *} SERVER_NAME=\"$SERVER_NAME\" && SERVER_LOCATION=\"$SERVER_LOCATION\" && POWER_PUSH_GATEWAY=\"$POWER_PUSH_GATEWAY\" && /usr/local/bin/push_power.sh;"} | \
+	    { crontab -l ; echo "${CRON_SCHEDULE:-*/20 * * * *} SERVER_NAME=\"$SERVER_NAME\" && SERVER_LOCATION=\"$SERVER_LOCATION\" && POWER_PUSH_GATEWAY=\"$POWER_PUSH_GATEWAY\" && /usr/local/bin/push_power.sh;"} | \
 	 	crontab - 
 	    exit
 	    ;;
