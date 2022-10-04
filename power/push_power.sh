@@ -58,7 +58,7 @@ instance="${SERVER_NAME:-$(hostname)}"
 tmp_power_json=$(mktemp)
 trap "rm $tmp_power_json" EXIT
 
-curl -s -o $tmp_power_json ${POWER_DATA_URL:-"https://raw.githubusercontent.com/Al3c5/toolbox/master/power/power.json"}
+curl -H 'Cache-Control: no-cache, no-store' -s -o $tmp_power_json ${POWER_DATA_URL:-"https://raw.githubusercontent.com/Al3c5/toolbox/master/power/power.json"}
 
 
 power_tdp_watt=$(jq ".CPUs[]  | select(.model_name | inside(\"$(lscpu | grep 'Model name:' )\")) | \
@@ -79,7 +79,7 @@ power_tdp_watt ${power_tdp_watt:-0}
 power_g_co2_per_k_watt_h ${power_g_co2_per_k_watt_h:-0}
 EOF
 
-if [ $debug -eq 1 ]
+if [[ $debug -eq 1 ]];
 	then
 		echo "Power.json file"
 		jq .  $tmp_power_json
