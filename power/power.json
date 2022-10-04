@@ -1,6 +1,12 @@
 {
   "CPUs": [
     {
+      "model_name": "AMD EPYC 7413 24-Core Processor",
+      "core": 24,
+      "thread": 48,
+      "TDP": 180
+    },
+    {
       "model_name": "AMD Ryzen 9 5950X",
       "core": 16,
       "thread": 32,
@@ -58,23 +64,23 @@
   "Countries": [
     {
       "code": "CA",
-      "carbone_intensity": 29
+      "carbone_intensity": 30
     },
     {
       "code": "FR",
-      "carbone_intensity": 112
+      "carbone_intensity": 116
     },
     {
       "code": "FI",
-      "carbone_intensity": 120
+      "carbone_intensity": 126
     },
     {
       "code": "DE",
-      "carbone_intensity": 325
+      "carbone_intensity": 438
     },
     {
       "code": "NO",
-      "carbone_intensity": 28
+      "carbone_intensity": 32
     }
   ]
 }
