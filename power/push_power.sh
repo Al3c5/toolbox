@@ -5,10 +5,10 @@
 
 ## using the following variables
 #
-# SERVER_NAME=your_server_name
-# SERVER_LOCATION=Country_code
-# POWER_PUSH_GATEWAY="http://push-gateaway-url:port"
-# POWER_DATA_URL (default value: https://raw.githubusercontent.com/Al3c5/toolbox/main/power/power.json)
+# SERVER_NAME=your_server_name (default hostname)
+# SERVER_LOCATION=Country_code (mandatory no default)
+# POWER_PUSH_GATEWAY="http://push-gateaway-url:port" (mandatory no default)
+# POWER_DATA_URL (default value: https://raw.githubusercontent.com/Al3c5/toolbox/main/power/power.json, usage file:///path/to/your/own/file)
 #
 # typical cron usage would be 
 # */20 * * * * SERVER_NAME=my_server && SERVER_LOCATION=FR && POWER_PUSH_GATEWAY="http://my-monitoring-url:port" && /path/to/push_power.sh 
@@ -41,11 +41,9 @@ esac
 done
 
 install () {
-	read -p "Server name " SERVER_NAME
         read -p "Server location " SERVER_LOCATION
         read -p "Prometheus push-gateway url" POWER_PUSH_GATEWAY
-        read -p "Cron schdeule (default: */20 * * * *)"  CRON_SCHEDULE
-        { crontab -l 2>/dev/null ; echo "${CRON_SCHEDULE:-*/20 * * * *} SERVER_NAME=\"$SERVER_NAME\" && SERVER_LOCATION=\"$SERVER_LOCATION\" && POWER_PUSH_GATEWAY=\"$POWER_PUSH_GATEWAY\" && /usr/local/bin/push_power.sh";} | crontab -
+        { crontab -l 2>/dev/null ; echo "${CRON_SCHEDULE:-*/15 * * * *}  export SERVER_LOCATION=\"$SERVER_LOCATION\" ; export POWER_PUSH_GATEWAY=\"$POWER_PUSH_GATEWAY\" ; /usr/local/bin/push_power.sh";} | crontab -
 	exit 1
 }
 
@@ -60,13 +58,13 @@ instance="${SERVER_NAME:-$(hostname)}"
 tmp_power_json=$(mktemp)
 trap "rm $tmp_power_json" EXIT
 
-curl -s -o $tmp_power_json ${POWER_DATA_URL:-https://raw.githubusercontent.com/Al3c5/toolbox/main/power/power.json}
+curl -s -o $tmp_power_json ${POWER_DATA_URL:-"https://raw.githubusercontent.com/Al3c5/toolbox/master/power/power.json"}
 
 
 power_tdp_watt=$(jq ".CPUs[]  | select(.model_name | inside(\"$(lscpu | grep 'Model name:' )\")) | \
 	$(lscpu | grep 'CPU(s):' | head -1 | egrep -o '[0-9]{1,}') * \
 	.TDP / .thread "  $tmp_power_json ) # CPUs x  cost per CPU
-power_g_co2_per_k_watt_h=$(jq ".Countries[]  | select(.code==\"$SERVER_LOCATION\") .carbone_intensity "  $tmp_power_json)
+power_g_co2_per_k_watt_h=$( jq ".Countries[]  | select(.code==\"$SERVER_LOCATION\") .carbone_intensity "   $tmp_power_json )
 
 tmp_metrics=$(mktemp)
 trap "rm $tmp_metrics" EXIT
@@ -83,7 +81,9 @@ EOF
 
 if [ $debug -eq 1 ]
 	then
-		echo "$url_gw"
+		echo "Power.json file"
+		jq .  $tmp_power_json
+		echo "URL : $url_gw"
 		echo 
 		cat $tmp_metrics
 		exit
