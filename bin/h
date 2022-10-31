@@ -1,3 +1,5 @@
 #!/bin/bash 
 
+# TODO prevoir option to exe, pipe to grep and/or less
+
 $* --help | less

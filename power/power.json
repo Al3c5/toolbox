@@ -64,23 +64,23 @@
   "Countries": [
     {
       "code": "CA",
-      "carbone_intensity": 28
+      "carbone_intensity": 30
     },
     {
       "code": "FR",
-      "carbone_intensity": 90
+      "carbone_intensity": 91
     },
     {
       "code": "FI",
-      "carbone_intensity": 123
+      "carbone_intensity": 113
     },
     {
       "code": "DE",
-      "carbone_intensity": 295
+      "carbone_intensity": 392
     },
     {
       "code": "NO",
-      "carbone_intensity": 26
+      "carbone_intensity": 25
     }
   ]
 }
