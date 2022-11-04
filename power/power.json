@@ -7,6 +7,12 @@
       "TDP": 180
     },
     {
+      "model_name": "AMD EPYC 7443P 24-Core Processor",
+      "core": 24,
+      "thread": 48,
+      "TDP": 200
+    },
+    {
       "model_name": "AMD Ryzen 9 5950X",
       "core": 16,
       "thread": 32,
