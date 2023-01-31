@@ -13,6 +13,12 @@
       "TDP": 200
     },
     {
+      "model_name": "AMD EPYC 7F72",
+      "core": 24,
+      "thread": 48,
+      "TDP": 240
+    },
+    {
       "model_name": "AMD Ryzen 9 5950X",
       "core": 16,
       "thread": 32,
@@ -87,6 +93,10 @@
     {
       "code": "NO",
       "carbone_intensity": 30
+    },
+    {
+      "code": "US-NY",
+      "carbone_intensity": 307
     },
     {
       "code": "SW",
