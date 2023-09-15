@@ -76,7 +76,7 @@
   "Countries": [
     {
       "code": "CA",
-      "carbone_intensity": 40
+      "carbone_intensity": 38
     },
     {
       "code": "FR",
@@ -84,19 +84,19 @@
     },
     {
       "code": "FI",
-      "carbone_intensity": 36
+      "carbone_intensity": 57
     },
     {
       "code": "DE",
-      "carbone_intensity": 218
+      "carbone_intensity": 557
     },
     {
       "code": "NO",
-      "carbone_intensity": 26
+      "carbone_intensity": 25
     },
     {
       "code": "US-NY",
-      "carbone_intensity": 324
+      "carbone_intensity": 275
     },
     {
       "code": "SW",
