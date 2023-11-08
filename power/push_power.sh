@@ -55,8 +55,7 @@ fi
 
 instance="${SERVER_NAME:-$(hostname)}"
 
-tmp_power_json=$(mktemp)
-trap "rm $tmp_power_json" EXIT
+tmp_power_json=~/.last_power.json
 
 curl -H 'Cache-Control: no-cache, no-store' -s -o $tmp_power_json ${POWER_DATA_URL:-"https://raw.githubusercontent.com/Al3c5/toolbox/master/power/power.json"}
 
@@ -72,12 +71,12 @@ trap "rm $tmp_metrics" EXIT
 url_gw=$POWER_PUSH_GATEWAY/metrics/job/power/instance/$instance
 
 
-cat <<EOF >> $tmp_metrics
+METRICS="\
 # TYPE power_tdp_watt gauge
 power_tdp_watt ${power_tdp_watt:-0}
 # TYPE power_g_co2_per_k_watt_h gauge
 power_g_co2_per_k_watt_h ${power_g_co2_per_k_watt_h:-0}
-EOF
+"
 
 if [[ $debug -eq 1 ]];
 	then
@@ -85,10 +84,10 @@ if [[ $debug -eq 1 ]];
 		jq .  $tmp_power_json
 		echo "URL : $url_gw"
 		echo 
-		cat $tmp_metrics
+		echo "$METRICS"
 		exit
 fi
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-cat $tmp_metrics  | curl --insecure -s  --data-binary @- $url_gw
+echo "$METRICS"  | curl --insecure -s  --data-binary @- $url_gw
 

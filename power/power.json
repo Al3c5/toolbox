@@ -80,27 +80,27 @@
     },
     {
       "code": "FR",
-      "carbone_intensity": 42
+      "carbone_intensity": 38
     },
     {
       "code": "FI",
-      "carbone_intensity": 60
+      "carbone_intensity": 96
     },
     {
       "code": "DE",
-      "carbone_intensity": 651
+      "carbone_intensity": 296
     },
     {
       "code": "NO",
-      "carbone_intensity": 23
+      "carbone_intensity": 25
     },
     {
       "code": "US-NY",
-      "carbone_intensity": 368
+      "carbone_intensity": 270
     },
     {
       "code": "SW",
-      "carbone_intensity": 16
+      "carbone_intensity": 21
     }
   ]
 }
