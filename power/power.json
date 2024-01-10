@@ -31,10 +31,22 @@
       "TDP": 105
     },
     {
+      "model_name": "i5-13500",
+      "core": 10,
+      "thread": 20,
+      "TDP": 65
+    },
+    {
       "model_name": "i9-9900K",
       "core": 8,
       "thread": 16,
       "TDP": 95
+    },
+    {
+      "model_name": "i9-13900",
+      "core": 16,
+      "thread": 32,
+      "TDP": 65
     },
     {
       "model_name": "AMD Ryzen 7 3700X",
@@ -80,27 +92,27 @@
     },
     {
       "code": "FR",
-      "carbone_intensity": 78
+      "carbone_intensity": 76
     },
     {
       "code": "FI",
-      "carbone_intensity": 128
+      "carbone_intensity": 71
     },
     {
       "code": "DE",
-      "carbone_intensity": 586
+      "carbone_intensity": 641
     },
     {
       "code": "NO",
-      "carbone_intensity": 27
+      "carbone_intensity": 41
     },
     {
       "code": "US-NY",
-      "carbone_intensity": 234
+      "carbone_intensity": 400
     },
     {
       "code": "SW",
-      "carbone_intensity": 29
+      "carbone_intensity": 28
     }
   ]
 }
